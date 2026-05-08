@@ -240,15 +240,21 @@ setInterval(rotarBanners, 5000);
 
   
         function mostrarDirectorio() {
-            vistaActual = 'directorio';
-            document.getElementById('btn-regresar').classList.add('hidden');
-            document.getElementById('seccion-contacto').classList.add('hidden');
-            document.getElementById('main-grid').classList.remove('hidden');
-            document.getElementById('hero-banner').classList.remove('hidden');
-            document.getElementById('titulo-seccion').innerText = "negocios destacados";
-            document.getElementById('btn-carrito-flotante').classList.add('hidden');
-            aplicarFiltros();
-        }
+    vistaActual = 'directorio';
+    document.getElementById('btn-regresar').classList.add('hidden');
+    document.getElementById('seccion-contacto').classList.add('hidden');
+    document.getElementById('main-grid').classList.remove('hidden');
+    document.getElementById('hero-banner').classList.remove('hidden');
+
+    // Mostrar otra vez los banners al regresar al directorio
+    document.getElementById('seccion-anuncios').classList.remove('hidden');
+
+    document.getElementById('titulo-seccion').innerText = "negocios destacados";
+    document.getElementById('btn-carrito-flotante').classList.add('hidden');
+    aplicarFiltros();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
         function abrirTienda(nombre) {
             if (carrito.length > 0 && tiendaSeleccionada !== "" && tiendaSeleccionada !== nombre) {
