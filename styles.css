@@ -1,0 +1,404 @@
+/* =========================================
+   1. VARIABLES Y ESTILOS BASE
+   ========================================= */
+:root {
+    --soft-gold: #dcb978;
+    --dark-text: #1a1a1a;
+    --text-muted: #6b7280;
+    --bg-light: #fbfbf9;
+    --blue-verified: #1d9bf0;
+    --dark-graphite: #2d2d2d;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--dark-text);
+    overflow-x: hidden; /* Evita que la página "baile" hacia los lados */
+}
+
+.hidden { display: none !important; }
+.gold-text { color: var(--soft-gold); }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#titulo-seccion {
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: lowercase;
+    font-size: 1.8rem;
+}
+
+/* =========================================
+   2. ENCABEZADO Y BÚSQUEDA
+   ========================================= */
+header {
+    background: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+.logo span { color: var(--soft-gold); }
+
+.search-container {
+    position: relative;
+    width: 40%;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.search-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.btn-nav {
+    background: transparent;
+    border: 1px solid var(--soft-gold);
+    color: var(--soft-gold);
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-nav:hover { background: var(--soft-gold); color: white; }
+
+/* =========================================
+   3. FILTROS (MENUDEO/MAYOREO Y BURBUJAS)
+   ========================================= */
+.filtros-bar {
+    background: white;
+    border-bottom: 1px solid #eee;
+    padding: 15px 5%;
+}
+
+.filtros-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; /* Esto los mantiene uno al lado del otro */
+    align-items: center;
+    gap: 20px;
+}
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Evita que el botón se aplaste */
+}
+
+/* Switch estilo iPhone */
+.switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: var(--soft-gold); }
+input:checked + .slider:before { transform: translateX(26px); }
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
+
+.burbujas-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    width: 100%;
+    scrollbar-width: thin; /* Muestra la barra en Firefox */
+}
+
+/* Restaurando tu barra de scroll con diseño Textimoro */
+.burbujas-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+.burbujas-scroll::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+.burbujas-scroll::-webkit-scrollbar-thumb {
+    background: var(--soft-gold);
+    border-radius: 10px;
+}
+
+.burbuja {
+    background: #f5f5f5;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.burbuja.activa, .burbuja:hover {
+    background: var(--soft-gold);
+    color: white;
+}
+/* =========================================
+   4. BANNERS PUBLICITARIOS
+   ========================================= */
+
+   /* --- DISEÑO DEL CARRUSEL VIP --- */
+.carrusel-contenedor {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto; /* Le da un poco de espacio arriba y abajo */
+    overflow: hidden; /* Oculta las imágenes que no caben en la pantalla */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Le da una sombra elegante */
+}
+
+.carrusel-pista {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Esta es la velocidad de deslizamiento */
+    width: 100%;
+}
+
+.banner-foto {
+    min-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+/* =========================================
+   5. HERO Y MENSAJES
+   ========================================= */
+.hero-box { text-align: center; margin: 40px 20px; }
+.hero-description { font-style: italic; color: var(--text-muted); font-size: 1.1rem; }
+.hero-line { width: 50px; height: 3px; background: var(--soft-gold); margin: 15px auto; }
+
+#btn-regresar {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+#btn-regresar:hover { color: var(--dark-text); }
+
+/* =========================================
+   6. GRID DE TARJETAS (TIENDAS Y PRODUCTOS)
+   ========================================= */
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+
+.card-image-wrapper img, .producto-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.info { padding: 15px; }
+.info h3 { margin-bottom: 5px; font-size: 1.1rem; text-transform: lowercase; }
+.detalles { font-size: 0.85rem; color: var(--text-muted); height: 40px; overflow: hidden; margin-bottom: 10px; }
+
+/* Botón de Explorar Colección */
+.btn-ver-tienda {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--soft-gold);
+    color: var(--soft-gold);
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: var(--transition);
+}
+.btn-ver-tienda:hover { background: var(--soft-gold); color: white; }
+
+/* Controles de Producto */
+.selector-talla { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ddd; margin: 10px 0; font-family: 'Inter', sans-serif; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; }
+.precio { font-size: 1.2rem; font-weight: 700; color: var(--dark-text); }
+
+.btn-wa-minimal {
+    background: var(--dark-graphite);
+    color: white;
+    border: none;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+}
+.btn-wa-minimal:hover { transform: scale(1.1); background: var(--soft-gold); }
+
+.zoom-overlay {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(255,255,255,0.9); padding: 5px 10px;
+    border-radius: 20px; font-size: 0.8rem; cursor: pointer; z-index: 10;
+}
+
+/* =========================================
+   7. INSIGNIAS DE VERIFICACIÓN (DISEÑO)
+   ========================================= */
+/* Borde dorado/azul sutil para la tarjeta de producto verificada */
+.producto-card.tienda-verificada {
+    border: 1px solid rgba(29, 155, 240, 0.15); 
+    box-shadow: 0 4px 12px rgba(29, 155, 240, 0.05);
+}
+
+/* =========================================
+   8. CARRITO FLOTANTE Y MODALES
+   ========================================= */
+#btn-carrito-flotante {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--dark-graphite); color: white;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 999; transition: var(--transition);
+}
+#btn-carrito-flotante:hover { background: var(--soft-gold); transform: scale(1.05); }
+
+#contador-carrito {
+    position: absolute; top: 0; right: 0;
+    background: #dc2626; color: white;
+    font-size: 0.75rem; font-weight: bold;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* Modales (Fondo Oscuro) */
+.modal-zoom {
+    display: none; position: fixed; z-index: 1001;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    align-items: center; justify-content: center;
+}
+
+.modal-content { max-width: 90%; max-height: 90%; border-radius: 10px; }
+.close-zoom { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+
+/* Contenido del Carrito */
+.carrito-content {
+    background: white; padding: 25px;
+    width: 100%; max-width: 500px;
+    position: relative; max-height: 80vh;
+    display: flex; flex-direction: column;
+}
+.carrito-content h3 { margin-bottom: 20px; text-transform: lowercase; }
+.carrito-content .close-zoom { color: var(--dark-text); top: 10px; right: 20px; font-size: 30px; }
+
+#lista-carrito { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; }
+
+.carrito-item-lista {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid #eee;
+}
+.carrito-item-info strong { text-transform: lowercase; }
+.carrito-item-info span { font-size: 0.85rem; color: var(--text-muted); }
+
+.btn-eliminar-item { background: transparent; border: none; color: #dc2626; cursor: pointer; font-size: 1.1rem; }
+
+.carrito-footer { border-top: 2px solid #eee; padding-top: 15px; }
+.carrito-resumen-fila, .carrito-total-fila { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.carrito-total-fila { font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: var(--dark-text); }
+
+.btn-carrito-enviar {
+    width: 100%; padding: 15px;
+    background: var(--dark-graphite); color: white;
+    border: none; border-radius: 8px; font-size: 1rem; font-weight: bold;
+    cursor: pointer; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px;
+    transition: var(--transition);
+}
+.btn-carrito-enviar:hover { background: var(--soft-gold); }
+.aviso-de-envio { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; text-align: center; font-style: italic;color: red;}
+
+
+/* =========================================
+   9. FORMULARIO DE CONTACTO
+   ========================================= */
+.form-container { 
+    max-width: 600px; margin: 0 auto; background: white; 
+    padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; 
+}
+.form-container h3 { margin-bottom: 10px; }
+.form-container p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem; }
+.form-container input, .form-container textarea { 
+    width: 100%; padding: 12px; margin-bottom: 15px; 
+    border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; 
+}
+.form-container textarea { height: 120px; resize: vertical; }
+.btn-submit { 
+    background: var(--soft-gold); color: white; border: none; 
+    padding: 12px 30px; border-radius: 25px; cursor: pointer; 
+    font-weight: bold; width: 100%; transition: var(--transition); 
+}
+.btn-submit:hover { background: var(--dark-graphite); }
+
+/* =========================================
+   10. RESPONSIVE (MÓVILES)
+   ========================================= */
+@media (max-width: 768px) {
+    header { flex-wrap: wrap; gap: 15px; }
+    .search-container { width: 100%; order: 3; }
+    
+    .banner-card { flex: 0 0 85%; } /* Ocupa casi toda la pantalla en móvil */
+    
+    #btn-carrito-flotante { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.2rem; }
+    
+    .grid-productos { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+    .card-image-wrapper img, .producto-card img { height: 200px; }
+    .info { padding: 10px; }
+}

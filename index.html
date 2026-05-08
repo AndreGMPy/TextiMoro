@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>textimoro | elegancia y tradición textil</title>
+    
+    <!-- metadatos para redes sociales (open graph) -->
+    <meta property="og:title" content="textimoro | el futuro textil">
+    <meta property="og:description" content="Descubre la moda de moroleón y uriangato directo de fábrica. compras seguras y mayoreo.">
+    <meta property="og:image" content="https://i.postimg.cc/tu_logo_textimoro.jpg">
+    <meta property="og:url" content="https://tu-dominio.com">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+
+    <!-- encabezado principal -->
+    <header class="animate__animated animate__fadeInDown">
+        <div class="logo">
+            <h1 onclick="mostrarDirectorio()">texti<span>moro</span></h1>
+        </div>
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" id="buscador" placeholder="buscar en textimoro..." onkeyup="aplicarFiltros()">
+        </div>
+        <button class="btn-nav" onclick="mostrarContacto()">contacto</button>
+    </header>
+
+    <!-- barra de filtros de busqueda-->
+    <div class="filtros-bar animate__animated animate__fadeInDown">
+        <div class="filtros-container">
+            <div class="toggle-wrapper">
+                <span class="toggle-label">menudeo</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-mayoreo" onchange="cambiarModoCompra()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label gold-text">mayoreo</span>
+            </div>
+            <div class="burbujas-scroll">
+                <button class="burbuja activa" onclick="seleccionarCategoria('', this)">todos</button>
+                <button class="burbuja" onclick="seleccionarCategoria('mezclilla', this)">👖 mezclilla</button>
+                <button class="burbuja" onclick="seleccionarCategoria('tejido', this)">🧶 tejido</button>
+                <button class="burbuja" onclick="seleccionarCategoria('infantil', this)">👶 infantil</button>
+                <button class="burbuja" onclick="seleccionarCategoria('deportivo', this)">⚽ deportivo</button>
+                <button class="burbuja" onclick="seleccionarCategoria('dama', this)">👗 dama</button>
+                <button class="burbuja" onclick="seleccionarCategoria('caballero', this)">👔 caballero</button
+                    n>
+            </div>
+        </div>
+    </div>
+
+    <!-- carrusel de anuncios (CON SCROLL HORIZONTAL) -->
+
+    <div id="seccion-anuncios" class="carrusel-contenedor">
+    <div class="carrusel-pista" id="pista-banners">
+        <!-- Puedes cambiar estos enlaces por las fotos de tus banners -->
+        <img src="https://edit.org/img/blog/hrr-plantillas-moda-ropa-complementos-diseno-editar-editable-editor-carteles-marketing-comunicacion-personalizable.jpg" class="banner-foto">
+        <img src="https://via.placeholder.com/800x300/33c1ff/ffffff?text=Anuncio+2" class="banner-foto">
+        <img src="https://via.placeholder.com/800x300/8d33ff/ffffff?text=Anuncio+3" class="banner-foto">
+    </div>
+</div>
+        
+    
+
+    <!-- mensaje de bienvenida -->
+    <div class="hero-box animate__animated animate__fadeIn" id="hero-banner">
+        <p class="hero-description">"Moda de Moroleón y Uriangato directo hasta tu casa"</p>
+        <div class="hero-line"></div>
+    </div>
+
+    <!-- contenedor dinámico (tiendas o productos) -->
+    <div class="container">
+        <button id="btn-regresar" class="hidden animate__animated animate__fadeInLeft" onclick="mostrarDirectorio()">
+            <i class="fas fa-arrow-left"></i> volver al directorio
+        </button>
+        
+        <h2 id="titulo-seccion" class="animate__animated animate__fadeIn">negocios destacados</h2>
+        <div id="main-grid" class="grid-productos"></div>
+
+        <!-- formulario de contacto -->
+        <div id="seccion-contacto" class="hidden animate__animated animate__fadeInUp">
+            <div class="form-container">
+                <h3>¿quieres registrar tu negocio o anunciarte?</h3>
+                <p>déjanos tus datos y nos pondremos en contacto contigo.</p>
+                <form action="https://formsubmit.co/brandongordillo54@gmail.com" method="POST">
+                    <input type="text" name="name" placeholder="tu nombre o negocio" required>
+                    <input type="email" name="email" placeholder="tu correo electrónico" required>
+                    <textarea name="message" placeholder="¿en qué podemos ayudarte?" required></textarea>
+                    <button type="submit" class="btn-submit">enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- boton flotante del carrito -->
+    <div id="btn-carrito-flotante" class="hidden animate__animated animate__bounceIn" onclick="abrirModalCarrito()">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="contador-carrito">0</span>
+    </div>
+
+    <!-- modal del carrito inteligente -->
+    <div id="modalCarrito" class="modal-zoom">
+        <div class="modal-content carrito-content">
+            <span class="close-zoom" onclick="cerrarModalCarrito()">&times;</span>
+            <h3>tu pedido en <span id="nombre-tienda-carrito" class="gold-text"></span></h3>
+            <div id="lista-carrito"></div>
+            
+            <div style="font-size: 0.8rem; color: #6b7280; text-align: center; margin-bottom: 15px; font-style: italic;">El precio del envío es un aproximado, puede ser más o menos dependiendo del tamaño del paquete.</div>
+            <div class="carrito-footer">
+                <div class="carrito-resumen-fila">
+                    <span>subtotal prendas:</span>
+                    <span>$<span id="subtotal-carrito">0</span></span>
+                </div>
+                <div class="carrito-resumen-fila">
+                    <span>envío nacional est:</span>
+                    <span>$<span id="envio-carrito">0</span></span>
+                </div>
+                <h4 class="carrito-total-fila">
+                    <span>total:</span>
+                    <span>$<span id="total-carrito">0</span></span>
+                </h4>
+
+            
+                
+                <!-- texto de advertencia (oculto por defecto) -->
+                <p id="aviso-minimo-carrito" style="color: #dc2626; font-size: 0.85rem; font-weight: 700; margin-top: 10px; display: none;">
+                    ⚠️ faltan prendas para el precio de mayoreo.
+                </p>
+
+                <!-- boton bloqueable -->
+                <button id="btn-enviar-wa" class="btn-submit btn-carrito-enviar" onclick="enviarPedidoWA()">
+                    <i class="fab fa-whatsapp"></i> solicitar pedido al negocio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal para hacer zoom a las fotos -->
+    <div id="modalZoom" class="modal-zoom" onclick="cerrarZoom(event)">
+        <span class="close-zoom">&times;</span>
+        <img class="modal-content" id="imgZoomTarget">
+    </div>
+
+    <!-- FOOTER LEGAL Y SOPORTE (NUEVO) -->
+    <footer style="background: #1a1a1a; color: #fbfbf9; padding: 40px 20px; margin-top: 50px; text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 style="color: #dcb978; text-transform: lowercase; font-size: 1.5rem; margin-bottom: 10px;">texti<span>moro</span></h3>
+            <p style="font-size: 0.9rem; color: #9ca3af; max-width: 600px; margin: 0 auto 15px auto;">conectando el talento textil de moroleón y uriangato con el mundo.</p>
+            
+            <div style="margin: 30px 0; border-top: 1px solid #333; border-bottom: 1px solid #333; padding: 20px 0;">
+                <h4 style="font-size: 1rem; margin-bottom: 10px;">¿tuviste algún problema con un pedido?</h4>
+                <p style="font-size: 0.85rem; color: #d1d5db; margin-bottom: 15px;">queremos que tu experiencia sea excelente. si tuviste inconvenientes con un comercio, contáctanos para dar soluciones.</p>
+                <button onclick="mostrarContacto()" style="background: #dcb978; color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: 600;">reportar un problema</button>
+            </div>
+
+            <p style="font-size: 0.7rem; color: #6b7280; line-height: 1.4;">
+                *descargo de responsabilidad: textimoro es una plataforma publicitaria de enlace. la transacción, calidad y envío son responsabilidad directa del vendedor. nosotros actuamos únicamente como mediadores para garantizar la mejor comunidad posible.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        //Animacion de los banners eipicos
+        let indiceBanner = 0; // Empezamos en la foto cero (la primera)
+
+function rotarBanners() {
+    const pista = document.getElementById('pista-banners');
+    const totalBanners = document.querySelectorAll('.banner-foto').length;
+    
+    indiceBanner++; // Sumamos 1 para ir a la siguiente foto
+    
+    // Si ya llegamos al último banner, regresamos al primero
+    if (indiceBanner >= totalBanners) {
+        indiceBanner = 0; 
+    }
+    
+    // Calculamos cuánto empujar la foto hacia la izquierda (100%, 200%, etc.)
+    let empuje = -(indiceBanner * 100); 
+    pista.style.transform = `translateX(${empuje}%)`;
+}
+
+// setInterval es el reloj: ejecuta la función rotarBanners cada 3000 milisegundos (3 segundos)
+setInterval(rotarBanners, 5000); // Cambia el número para ajustar la velocidad de rotación (5000 = 5 segundos)
+
+
+
+
+
+        // conexion a google sheets
+        const API_KEY = 'AIzaSyCfNFHlfIU9bXBNeXMNrE5vFpy7QVSjvw8'; 
+        const SPREADSHEET_ID = '1K4xJdAt11_xFXuORDKGKHMuyML7E5_6PgG2E99a600Y';
+        const RANGE_TIENDAS = 'Tiendas!A2:E'; 
+        const RANGE_PRODUCTOS = 'Textimoronegocio1!A2:I'; 
+
+        let tiendas = [], productos = [];
+        let vistaActual = 'directorio';
+        let tiendaSeleccionada = "";
+        let categoriaActual = "";
+        let carrito = [];
+        let telefonoTiendaActual = "";
+
+        async function cargarPortal() {
+            try {
+    const [resT, resP] = await Promise.all([
+        // Adiós links gigantes y API Keys
+        fetch('https://api-textimoro.onrender.com/api/tiendas'),
+        fetch('https://api-textimoro.onrender.com/api/productos')
+    ]);
+    
+    const dataT = await resT.json(); 
+    const dataP = await resP.json();
+    
+    // Tu código sigue funcionando igualito
+    tiendas = dataT.values || []; 
+    productos = dataP.values || [];
+    
+    mostrarDirectorio();
+} catch (e) { 
+    console.error("error cargando el backend local", e); 
+}
+        }
+
+        // --- logica anti-trampas para el switch de mayoreo ---
+        function cambiarModoCompra() {
+            if(carrito.length > 0) {
+                if(confirm("cambiar entre menudeo y mayoreo reiniciará tu carrito actual para ajustar los precios. ¿deseas continuar?")) {
+                    carrito = [];
+                    actualizarUIcarrito();
+                } else {
+                    const toggle = document.getElementById('toggle-mayoreo');
+                    toggle.checked = !toggle.checked;
+                    return;
+                }
+            }
+            aplicarFiltros();
+        }
+
+        // --- navegacion ---
+        function mostrarDirectorio() {
+            vistaActual = 'directorio';
+            document.getElementById('btn-regresar').classList.add('hidden');
+            document.getElementById('seccion-contacto').classList.add('hidden');
+            document.getElementById('main-grid').classList.remove('hidden');
+            document.getElementById('hero-banner').classList.remove('hidden');
+            document.getElementById('titulo-seccion').innerText = "negocios destacados";
+            document.getElementById('btn-carrito-flotante').classList.add('hidden');
+            aplicarFiltros();
+        }
+
+        function abrirTienda(nombre) {
+            if (carrito.length > 0 && tiendaSeleccionada !== "" && tiendaSeleccionada !== nombre) {
+                if(confirm("tienes productos de otra tienda en tu carrito. si cambias de tienda, tu pedido se borrará. ¿continuar?")) {
+                    carrito = [];
+                } else return;
+            }
+            vistaActual = 'tienda';
+            tiendaSeleccionada = nombre;
+            document.getElementById('btn-regresar').classList.remove('hidden');
+            document.getElementById('seccion-contacto').classList.add('hidden');
+            document.getElementById('main-grid').classList.remove('hidden');
+            document.getElementById('hero-banner').classList.add('hidden');
+            document.getElementById('seccion-anuncios').classList.add('hidden');
+            document.getElementById('titulo-seccion').innerText = "catálogo: " + nombre;
+            document.getElementById('nombre-tienda-carrito').innerText = nombre;
+            actualizarUIcarrito();
+            aplicarFiltros();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function mostrarContacto() {
+            vistaActual = 'contacto';
+            document.getElementById('btn-regresar').classList.remove('hidden');
+            document.getElementById('main-grid').classList.add('hidden');
+            document.getElementById('hero-banner').classList.add('hidden');
+            document.getElementById('seccion-anuncios').classList.add('hidden');
+            document.getElementById('seccion-contacto').classList.remove('hidden');
+            document.getElementById('btn-carrito-flotante').classList.add('hidden');
+            document.getElementById('titulo-seccion').innerText = "contacto empresarial";
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- filtros y categorias ---
+        function seleccionarCategoria(cat, elementoBoton) {
+            categoriaActual = cat.toLowerCase();
+            document.querySelectorAll('.burbuja').forEach(b => b.classList.remove('activa'));
+            elementoBoton.classList.add('activa');
+            aplicarFiltros();
+        }
+
+        function aplicarFiltros() {
+            if(vistaActual === 'contacto') return;
+            const textoBusqueda = document.getElementById('buscador').value.toLowerCase();
+            const soloMayoreo = document.getElementById('toggle-mayoreo').checked;
+
+            if (vistaActual === 'directorio') {
+                const tiendasFiltradas = tiendas.filter(t => {
+                    const textoFila = t.join(' ').toLowerCase();
+                    return textoFila.includes(textoBusqueda) && 
+                           (categoriaActual === "" || textoFila.includes(categoriaActual)) && 
+                           (!soloMayoreo || textoFila.includes('mayoreo'));
+                });
+                renderizarDirectorio(tiendasFiltradas);
+            } else {
+                const productosFiltrados = productos.filter(p => {
+                    if (p[0] !== tiendaSeleccionada) return false;
+                    const textoFila = p.join(' ').toLowerCase();
+                    return textoFila.includes(textoBusqueda) && 
+                           (categoriaActual === "" || textoFila.includes(categoriaActual));
+                });
+                renderizarCatalogo(productosFiltrados);
+            }
+        }
+
+        // --- RENDERIZADO DE DIRECTORIO (NUEVO CON CLIC ESPECIFICO Y SELLO AZUL) ---
+        function renderizarDirectorio(lista) {
+            const container = document.getElementById('main-grid');
+            if(lista.length === 0) { container.innerHTML = "<p>no se encontraron resultados.</p>"; return; }
+            
+            container.innerHTML = lista.map((t, index) => {
+                let selloVerificacion = '';
+                if (t.join(' ').toLowerCase().includes('verificado')) {
+                    selloVerificacion = `
+                        <span style="display:inline-flex; align-items:center; color:#1d9bf0; background:rgba(29,155,240,0.1); padding:2px 6px; border-radius:6px; font-size:0.65rem; font-weight:700; margin-left:8px; text-transform:none; vertical-align:middle;">
+                            <i class="fas fa-check-circle" style="margin-right:3px;"></i> verificado
+                        </span>
+                    `;
+                }
+
+                return `
+                <div class="card tienda-card animate__animated animate__fadeInUp" style="animation-delay: ${index * 0.05}s">
+                    <div class="card-image-wrapper"><img src="${t[2]}" alt="${t[0]}" loading="lazy"></div>
+                    <div class="info">
+                        <h3 style="display: flex; align-items: center; margin-bottom: 5px;">
+                            ${t[0]}
+                            ${selloVerificacion}
+                        </h3>
+                        <p class="detalles"><i class="fas fa-location-dot"></i> ${t[4]}</p>
+                        
+                        <!-- EL CLIC ESTÁ SOLAMENTE AQUÍ -->
+                        <span class="btn-ver-tienda" onclick="abrirTienda('${t[0]}')" style="cursor: pointer; display: inline-block;">explorar colección</span>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // --- RENDERIZADO DE CATÁLOGO (NUEVO CON SELLO DE CONFIANZA Y TUS TALLAS/PRECIOS) ---
+        function renderizarCatalogo(lista) {
+
+    
+            const container = document.getElementById('main-grid');
+            if(lista.length === 0) { container.innerHTML = "<p>no hay prendas que coincidan.</p>"; return; }
+            
+            const soloMayoreo = document.getElementById('toggle-mayoreo').checked;
+
+            container.innerHTML = lista.map((p, index) => {
+                telefonoTiendaActual = p[5];
+                const opcionesTallas = (p[6] || "única").split(',').map(t => `<option value="${t.trim()}">${t.trim()}</option>`).join('');
+                
+                let bloqueVerificacionTienda = '';
+                let claseTarjetaVerificada = '';
+                if (p[4] && p[4].toLowerCase().includes('verificado')) {
+                    claseTarjetaVerificada = 'tienda-verificada';
+                    bloqueVerificacionTienda = `
+                        <div class="insignia-verificado-visible" style="display:flex; align-items:center; color:#1d9bf0; font-size:0.7rem; font-weight:600; margin-top:2px;">
+                            <i class="fas fa-check-circle" style="margin-right:4px;"></i> este comercio ha sido verificado
+                        </div>
+                    `;
+                }
+
+                let precioMenudeo = parseFloat(p[2]);
+                let precioMayoreo = p[7] ? parseFloat(p[7]) : precioMenudeo; 
+                let minPiezas = p[8] ? parseInt(p[8]) : 6; 
+                let precioFinal = soloMayoreo ? precioMayoreo : precioMenudeo;
+                let etiquetaMayoreo = soloMayoreo ? `<div class="talla-badge" style="background:#fef08a; color:#854d0e; border-color:#fde047;">mín. ${minPiezas} piezas</div>` : '';
+
+                return `
+                <div class="card producto-card ${claseTarjetaVerificada} animate__animated animate__zoomIn" style="animation-delay: ${index * 0.05}s">
+                    <div class="zoom-overlay" onclick="abrirZoom('${p[3]}')"><i class="fas fa-search-plus"></i> acercar</div>
+                    <img src="${p[3]}" alt="${p[1]}" loading="lazy">
+                    <div class="info">
+                        <div class="card-tienda-info" style="margin-bottom:8px; display:flex; flex-direction:column; gap:2px;">
+                            <span class="tienda-nombre-v" style="font-size:0.75rem; color:#6b7280; text-transform:uppercase; font-weight:700;">${p[0]}</span>
+                            ${bloqueVerificacionTienda}
+                        </div>
+                        <h3>${p[1]}</h3>
+                        <p class="detalles">${p[4]}</p>
+                        ${etiquetaMayoreo}
+                        <select class="selector-talla" id="talla-${index}" style="margin-top:10px;">${opcionesTallas}</select>
+                        <div class="card-footer">
+                            <span class="precio">$${precioFinal}</span>
+                            <button onclick="agregarAlCarrito('${p[1]}', ${precioFinal}, 'talla-${index}', '${p[4]}', ${minPiezas})" class="btn-wa-minimal" title="agregar al pedido">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // --- envios logistica ---
+        function estimarPeso(nombreProducto, detalles) {
+            const texto = (nombreProducto + " " + (detalles || "")).toLowerCase();
+            if (texto.includes('mezclilla') || texto.includes('chamarra') || texto.includes('abrigo') || texto.includes('jeans') || texto.includes('pantalón')) return 0.7;
+            if (texto.includes('playera') || texto.includes('blusa') || texto.includes('infantil') || texto.includes('calceta') || texto.includes('top')) return 0.2;
+            return 0.4; 
+        }
+
+        function calcularCostoEnvio(pesoTotalKilos) {
+            if (pesoTotalKilos === 0) return 0;
+            if (pesoTotalKilos <= 1.0) return 150; 
+            const kilosExtra = Math.ceil(pesoTotalKilos - 1.0);
+            return 150 + (kilosExtra * 50);
+        }
+
+        // --- carrito interactivo ---
+        function agregarAlCarrito(nombreProducto, precio, idSelectTalla, detalles, minPiezas) {
+            const tallaSeleccionada = document.getElementById(idSelectTalla).value;
+            const pesoEstimado = estimarPeso(nombreProducto, detalles);
+            
+            carrito.push({ nombre: nombreProducto, precio: parseFloat(precio), talla: tallaSeleccionada, peso: pesoEstimado, minPiezas: minPiezas });
+            actualizarUIcarrito();
+            
+            const btnFlotante = document.getElementById('btn-carrito-flotante');
+            btnFlotante.classList.remove('animate__bounceIn');
+            void btnFlotante.offsetWidth; 
+            btnFlotante.classList.add('animate__bounceIn');
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarUIcarrito();
+        }
+
+        function actualizarUIcarrito() {
+            const btnFlotante = document.getElementById('btn-carrito-flotante');
+            const contador = document.getElementById('contador-carrito');
+            const lista = document.getElementById('lista-carrito');
+            
+            contador.innerText = carrito.length;
+            if (carrito.length > 0 && vistaActual === 'tienda') {
+                btnFlotante.classList.remove('hidden');
+            } else {
+                btnFlotante.classList.add('hidden');
+            }
+
+            lista.innerHTML = "";
+            let subtotal = 0;
+            let pesoTotal = 0;
+
+            carrito.forEach((item, index) => {
+                subtotal += item.precio;
+                pesoTotal += item.peso;
+                lista.innerHTML += `
+                    <div class="carrito-item-lista">
+                        <div class="carrito-item-info">
+                            <strong>${item.nombre}</strong><br>
+                            <span>talla: ${item.talla} | $${item.precio}</span>
+                        </div>
+                        <button class="btn-eliminar-item" onclick="eliminarDelCarrito(${index})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            const costoEnvio = calcularCostoEnvio(pesoTotal);
+            const totalFinal = subtotal + costoEnvio;
+
+            document.getElementById('subtotal-carrito').innerText = subtotal.toFixed(2);
+            document.getElementById('envio-carrito').innerText = costoEnvio.toFixed(2);
+            document.getElementById('total-carrito').innerText = totalFinal.toFixed(2);
+
+            const btnEnviar = document.getElementById('btn-enviar-wa');
+            const avisoMinimo = document.getElementById('aviso-minimo-carrito');
+            const soloMayoreo = document.getElementById('toggle-mayoreo').checked;
+
+            if (soloMayoreo && carrito.length > 0) {
+                let minimoRequerido = carrito[0].minPiezas || 6;
+                
+                if (carrito.length < minimoRequerido) {
+                    btnEnviar.style.background = '#cccccc';
+                    btnEnviar.style.pointerEvents = 'none';
+                    avisoMinimo.style.display = 'block';
+                    avisoMinimo.innerText = `⚠️ te faltan ${minimoRequerido - carrito.length} prendas surtidas para poder pedir de mayoreo.`;
+                } else {
+                    btnEnviar.style.background = 'var(--dark-graphite)';
+                    btnEnviar.style.pointerEvents = 'auto';
+                    avisoMinimo.style.display = 'none';
+                }
+            } else {
+                if(btnEnviar) {
+                    btnEnviar.style.background = 'var(--dark-graphite)';
+                    btnEnviar.style.pointerEvents = 'auto';
+                }
+                if(avisoMinimo) avisoMinimo.style.display = 'none';
+            }
+        }
+
+        function enviarPedidoWA() {
+            if(carrito.length === 0) return;
+            
+            const soloMayoreo = document.getElementById('toggle-mayoreo').checked;
+            
+            let subtotal = 0;
+            let pesoTotal = 0;
+            let modoTexto = soloMayoreo ? "MAYOREO" : "MENUDEO";
+            let mensaje = `hola ${tiendaSeleccionada}, me gustaría hacer este pedido de *${modoTexto}* vía textimoro:\n\n`;
+            
+            carrito.forEach(item => {
+                mensaje += `▪ ${item.nombre} (talla: ${item.talla}) - $${item.precio}\n`;
+                subtotal += item.precio;
+                pesoTotal += item.peso;
+            });
+            
+            const costoEnvio = calcularCostoEnvio(pesoTotal);
+            const totalFinal = subtotal + costoEnvio;
+            
+            mensaje += `\n📦 *resumen del pedido*\n`;
+            mensaje += `subtotal prendas: $${subtotal}\n`;
+            mensaje += `envío nacional est. (${pesoTotal.toFixed(1)} kg): $${costoEnvio}\n`;
+            mensaje += `*total a depositar: $${totalFinal}*\n\n`;
+            mensaje += `¿me confirmas disponibilidad y método de pago?`;
+            
+            window.open(`https://wa.me/${telefonoTiendaActual}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        // --- ventanas modales ---
+        function abrirModalCarrito() { document.getElementById('modalCarrito').style.display = 'flex'; }
+        function cerrarModalCarrito() { document.getElementById('modalCarrito').style.display = 'none'; }
+        
+        function abrirZoom(src) {
+            document.getElementById("imgZoomTarget").src = src;
+            document.getElementById("modalZoom").style.display = "flex";
+        }
+        function cerrarZoom(e) { 
+            if(e.target.id === 'modalZoom' || e.target.classList.contains('close-zoom')) {
+                document.getElementById("modalZoom").style.display = "none"; 
+            }
+        }
+
+        window.onload = cargarPortal;
+    </script>
+</body>
+</html>
