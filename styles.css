@@ -1,6 +1,4 @@
-/* =========================================
-   1. VARIABLES Y ESTILOS BASE
-   ========================================= */
+
 :root {
     --soft-gold: #dcb978;
     --dark-text: #1a1a1a;
@@ -21,7 +19,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-light);
     color: var(--dark-text);
-    overflow-x: hidden; /* Evita que la página "baile" hacia los lados */
+    overflow-x: hidden; 
 }
 
 .hidden { display: none !important; }
@@ -40,9 +38,7 @@ body {
     font-size: 1.8rem;
 }
 
-/* =========================================
-   2. ENCABEZADO Y BÚSQUEDA
-   ========================================= */
+
 header {
     background: white;
     padding: 15px 5%;
@@ -98,9 +94,7 @@ header {
 
 .btn-nav:hover { background: var(--soft-gold); color: white; }
 
-/* =========================================
-   3. FILTROS (MENUDEO/MAYOREO Y BURBUJAS)
-   ========================================= */
+
 .filtros-bar {
     background: white;
     border-bottom: 1px solid #eee;
@@ -111,7 +105,7 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: row; /* Esto los mantiene uno al lado del otro */
+    flex-direction: row; 
     align-items: center;
     gap: 20px;
 }
@@ -122,10 +116,10 @@ header {
     gap: 10px;
     font-weight: 600;
     font-size: 0.9rem;
-    flex-shrink: 0; /* Evita que el botón se aplaste */
+    flex-shrink: 0; 
 }
 
-/* Switch estilo iPhone */
+
 .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
@@ -141,10 +135,10 @@ input:checked + .slider:before { transform: translateX(26px); }
     overflow-x: auto;
     padding-bottom: 8px;
     width: 100%;
-    scrollbar-width: thin; /* Muestra la barra en Firefox */
+    scrollbar-width: thin; 
 }
 
-/* Restaurando tu barra de scroll con diseño Textimoro */
+
 .burbujas-scroll::-webkit-scrollbar {
     height: 6px;
 }
@@ -173,23 +167,21 @@ input:checked + .slider:before { transform: translateX(26px); }
     background: var(--soft-gold);
     color: white;
 }
-/* =========================================
-   4. BANNERS PUBLICITARIOS
-   ========================================= */
 
-   /* --- DISEÑO DEL CARRUSEL VIP --- */
+
+  
 .carrusel-contenedor {
     width: 100%;
     max-width: 500px;
-    margin: 30px auto; /* Le da un poco de espacio arriba y abajo */
-    overflow: hidden; /* Oculta las imágenes que no caben en la pantalla */
+    margin: 30px auto; 
+    overflow: hidden; 
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Le da una sombra elegante */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
 }
 
 .carrusel-pista {
     display: flex;
-    transition: transform 0.5s ease-in-out; /* Esta es la velocidad de deslizamiento */
+    transition: transform 0.5s ease-in-out; 
     width: 100%;
 }
 
@@ -200,9 +192,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 }
 
 
-/* =========================================
-   5. HERO Y MENSAJES
-   ========================================= */
+
 .hero-box { text-align: center; margin: 40px 20px; }
 .hero-description { font-style: italic; color: var(--text-muted); font-size: 1.1rem; }
 .hero-line { width: 50px; height: 3px; background: var(--soft-gold); margin: 15px auto; }
@@ -221,9 +211,6 @@ input:checked + .slider:before { transform: translateX(26px); }
 }
 #btn-regresar:hover { color: var(--dark-text); }
 
-/* =========================================
-   6. GRID DE TARJETAS (TIENDAS Y PRODUCTOS)
-   ========================================= */
 .grid-productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -251,7 +238,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 .info h3 { margin-bottom: 5px; font-size: 1.1rem; text-transform: lowercase; }
 .detalles { font-size: 0.85rem; color: var(--text-muted); height: 40px; overflow: hidden; margin-bottom: 10px; }
 
-/* Botón de Explorar Colección */
+
 .btn-ver-tienda {
     display: block;
     text-align: center;
@@ -266,7 +253,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 }
 .btn-ver-tienda:hover { background: var(--soft-gold); color: white; }
 
-/* Controles de Producto */
+
 .selector-talla { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ddd; margin: 10px 0; font-family: 'Inter', sans-serif; }
 .card-footer { display: flex; justify-content: space-between; align-items: center; }
 .precio { font-size: 1.2rem; font-weight: 700; color: var(--dark-text); }
@@ -289,18 +276,13 @@ input:checked + .slider:before { transform: translateX(26px); }
     border-radius: 20px; font-size: 0.8rem; cursor: pointer; z-index: 10;
 }
 
-/* =========================================
-   7. INSIGNIAS DE VERIFICACIÓN (DISEÑO)
-   ========================================= */
-/* Borde dorado/azul sutil para la tarjeta de producto verificada */
+
 .producto-card.tienda-verificada {
     border: 1px solid rgba(29, 155, 240, 0.15); 
     box-shadow: 0 4px 12px rgba(29, 155, 240, 0.05);
 }
 
-/* =========================================
-   8. CARRITO FLOTANTE Y MODALES
-   ========================================= */
+
 #btn-carrito-flotante {
     position: fixed; bottom: 30px; right: 30px;
     background: var(--dark-graphite); color: white;
@@ -319,7 +301,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     display: flex; align-items: center; justify-content: center;
 }
 
-/* Modales (Fondo Oscuro) */
+
 .modal-zoom {
     display: none; position: fixed; z-index: 1001;
     left: 0; top: 0; width: 100%; height: 100%;
@@ -330,7 +312,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 .modal-content { max-width: 90%; max-height: 90%; border-radius: 10px; }
 .close-zoom { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
 
-/* Contenido del Carrito */
+
 .carrito-content {
     background: white; padding: 25px;
     width: 100%; max-width: 500px;
@@ -366,9 +348,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 .aviso-de-envio { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; text-align: center; font-style: italic;color: red;}
 
 
-/* =========================================
-   9. FORMULARIO DE CONTACTO
-   ========================================= */
+
 .form-container { 
     max-width: 600px; margin: 0 auto; background: white; 
     padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; 
@@ -387,14 +367,12 @@ input:checked + .slider:before { transform: translateX(26px); }
 }
 .btn-submit:hover { background: var(--dark-graphite); }
 
-/* =========================================
-   10. RESPONSIVE (MÓVILES)
-   ========================================= */
+
 @media (max-width: 768px) {
     header { flex-wrap: wrap; gap: 15px; }
     .search-container { width: 100%; order: 3; }
     
-    .banner-card { flex: 0 0 85%; } /* Ocupa casi toda la pantalla en móvil */
+    .banner-card { flex: 0 0 85%; } 
     
     #btn-carrito-flotante { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.2rem; }
     
