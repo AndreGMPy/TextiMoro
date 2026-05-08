@@ -222,7 +222,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     transition: var(--transition);
     display: flex;
     flex-direction: column;
-    height: 100%; 
+    height: auto;
 }
 
 .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
@@ -382,4 +382,31 @@ input:checked + .slider:before { transform: translateX(26px); }
         font-size: 0.82rem;
         line-height: 1.35;
     }
+}
+
+/* descripcion arreglao */
+.tienda-card {
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.tienda-card .info {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+}
+
+.tienda-card .detalles {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    display: block !important;
+    line-height: 1.4 !important;
+    max-height: none !important;
+    height: auto !important;
+    margin-bottom: 15px;
+}
+
+.tienda-card .btn-ver-tienda {
+    margin-top: 10px;
 }
