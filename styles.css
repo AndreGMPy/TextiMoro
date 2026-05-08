@@ -222,7 +222,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     transition: var(--transition);
     display: flex;
     flex-direction: column;
-    height: 100%; 
+    height: auto;
 }
 
 .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
@@ -231,8 +231,8 @@ input:checked + .slider:before { transform: translateX(26px); }
     width: 100%;
     height: 280px;
     object-fit: cover;
-    cursor: pointer;
 }
+
 
 .info { 
     padding: 15px; 
@@ -336,4 +336,85 @@ input:checked + .slider:before { transform: translateX(26px); }
     .detalles { font-size: 0.8rem; line-height: 1.3; }
     
     .btn-ver-tienda { padding: 8px; font-size: 0.85rem; }
+}
+
+/* =========================================
+   BOTÓN DE ACERCAR DENTRO DE LA PRENDA
+   ========================================= */
+.producto-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+}
+
+.producto-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: default;
+}
+
+.btn-acercar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--dark-text);
+    border: none;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: var(--transition);
+}
+
+.btn-acercar:hover {
+    background: var(--soft-gold);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .producto-img-wrapper {
+        height: 180px;
+    }
+
+    .btn-acercar {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+}
+
+/* Evita que se corte la descripción de las tiendas */
+.tienda-card {
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.tienda-card .info {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+}
+
+.tienda-card .detalles {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    display: block !important;
+    line-height: 1.4 !important;
+    max-height: none !important;
+    height: auto !important;
+    margin-bottom: 15px;
+}
+
+.tienda-card .btn-ver-tienda {
+    margin-top: 10px;
 }
