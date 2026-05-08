@@ -1,4 +1,6 @@
-
+/* =========================================
+   1. VARIABLES Y ESTILOS BASE
+   ========================================= */
 :root {
     --soft-gold: #dcb978;
     --dark-text: #1a1a1a;
@@ -19,7 +21,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-light);
     color: var(--dark-text);
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 .hidden { display: none !important; }
@@ -38,7 +40,9 @@ body {
     font-size: 1.8rem;
 }
 
-
+/* =========================================
+   2. ENCABEZADO Y BÚSQUEDA
+   ========================================= */
 header {
     background: white;
     padding: 15px 5%;
@@ -94,7 +98,9 @@ header {
 
 .btn-nav:hover { background: var(--soft-gold); color: white; }
 
-
+/* =========================================
+   3. FILTROS
+   ========================================= */
 .filtros-bar {
     background: white;
     border-bottom: 1px solid #eee;
@@ -105,7 +111,7 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     align-items: center;
     gap: 20px;
 }
@@ -116,9 +122,8 @@ header {
     gap: 10px;
     font-weight: 600;
     font-size: 0.9rem;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
-
 
 .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
 .switch input { opacity: 0; width: 0; height: 0; }
@@ -135,21 +140,11 @@ input:checked + .slider:before { transform: translateX(26px); }
     overflow-x: auto;
     padding-bottom: 8px;
     width: 100%;
-    scrollbar-width: thin; 
 }
 
-
-.burbujas-scroll::-webkit-scrollbar {
-    height: 6px;
-}
-.burbujas-scroll::-webkit-scrollbar-track {
-    background: #f5f5f5;
-    border-radius: 10px;
-}
-.burbujas-scroll::-webkit-scrollbar-thumb {
-    background: var(--soft-gold);
-    border-radius: 10px;
-}
+.burbujas-scroll::-webkit-scrollbar { height: 6px; }
+.burbujas-scroll::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 10px; }
+.burbujas-scroll::-webkit-scrollbar-thumb { background: var(--soft-gold); border-radius: 10px; }
 
 .burbuja {
     background: #f5f5f5;
@@ -163,25 +158,23 @@ input:checked + .slider:before { transform: translateX(26px); }
     font-weight: 500;
 }
 
-.burbuja.activa, .burbuja:hover {
-    background: var(--soft-gold);
-    color: white;
-}
+.burbuja.activa, .burbuja:hover { background: var(--soft-gold); color: white; }
 
-
-  
+/* =========================================
+   4. CARRUSEL VIP
+   ========================================= */
 .carrusel-contenedor {
     width: 100%;
     max-width: 500px;
-    margin: 30px auto; 
-    overflow: hidden; 
+    margin: 30px auto;
+    overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .carrusel-pista {
     display: flex;
-    transition: transform 0.5s ease-in-out; 
+    transition: transform 0.5s ease-in-out;
     width: 100%;
 }
 
@@ -191,8 +184,9 @@ input:checked + .slider:before { transform: translateX(26px); }
     object-fit: cover;
 }
 
-
-
+/* =========================================
+   5. HERO Y MENSAJES
+   ========================================= */
 .hero-box { text-align: center; margin: 40px 20px; }
 .hero-description { font-style: italic; color: var(--text-muted); font-size: 1.1rem; }
 .hero-line { width: 50px; height: 3px; background: var(--soft-gold); margin: 15px auto; }
@@ -209,8 +203,10 @@ input:checked + .slider:before { transform: translateX(26px); }
     gap: 8px;
     font-size: 1rem;
 }
-#btn-regresar:hover { color: var(--dark-text); }
 
+/* =========================================
+   6. GRID DE TARJETAS (CORREGIDO)
+   ========================================= */
 .grid-productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -224,7 +220,11 @@ input:checked + .slider:before { transform: translateX(26px); }
     position: relative;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
 }
+
 .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
 
 .card-image-wrapper img, .producto-card img {
@@ -234,27 +234,48 @@ input:checked + .slider:before { transform: translateX(26px); }
     cursor: pointer;
 }
 
-.info { padding: 15px; }
-.info h3 { margin-bottom: 5px; font-size: 1.1rem; text-transform: lowercase; }
-.detalles { font-size: 0.85rem; color: var(--text-muted); height: 40px; overflow: hidden; margin-bottom: 10px; }
+.info { 
+    padding: 15px; 
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
 
+.info h3 { 
+    margin-bottom: 8px; 
+    font-size: 1.1rem; 
+    text-transform: lowercase; 
+    line-height: 1.2;
+}
+
+.detalles { 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    margin-bottom: 12px;
+    line-height: 1.5;
+    height: auto; 
+    overflow: visible; 
+    word-wrap: break-word;
+}
+
+.detalles i { color: var(--soft-gold); margin-right: 5px; }
 
 .btn-ver-tienda {
     display: block;
     text-align: center;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid var(--soft-gold);
     color: var(--soft-gold);
     border-radius: 8px;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: auto; 
     transition: var(--transition);
+    text-decoration: none;
 }
 .btn-ver-tienda:hover { background: var(--soft-gold); color: white; }
 
-
-.selector-talla { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ddd; margin: 10px 0; font-family: 'Inter', sans-serif; }
+.selector-talla { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ddd; margin: 10px 0; }
 .card-footer { display: flex; justify-content: space-between; align-items: center; }
 .precio { font-size: 1.2rem; font-weight: 700; color: var(--dark-text); }
 
@@ -268,39 +289,24 @@ input:checked + .slider:before { transform: translateX(26px); }
     display: flex; align-items: center; justify-content: center;
     transition: var(--transition);
 }
-.btn-wa-minimal:hover { transform: scale(1.1); background: var(--soft-gold); }
 
-.zoom-overlay {
-    position: absolute; top: 10px; right: 10px;
-    background: rgba(255,255,255,0.9); padding: 5px 10px;
-    border-radius: 20px; font-size: 0.8rem; cursor: pointer; z-index: 10;
-}
-
-
-.producto-card.tienda-verificada {
-    border: 1px solid rgba(29, 155, 240, 0.15); 
-    box-shadow: 0 4px 12px rgba(29, 155, 240, 0.05);
-}
-
-
+/* =========================================
+   7. MODALES Y CARRITO
+   ========================================= */
 #btn-carrito-flotante {
     position: fixed; bottom: 30px; right: 30px;
     background: var(--dark-graphite); color: white;
     width: 60px; height: 60px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 999; transition: var(--transition);
+    font-size: 1.5rem; cursor: pointer; z-index: 999;
 }
-#btn-carrito-flotante:hover { background: var(--soft-gold); transform: scale(1.05); }
 
 #contador-carrito {
     position: absolute; top: 0; right: 0;
     background: #dc2626; color: white;
-    font-size: 0.75rem; font-weight: bold;
-    width: 22px; height: 22px; border-radius: 50%;
+    font-size: 0.75rem; width: 22px; height: 22px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
 }
-
 
 .modal-zoom {
     display: none; position: fixed; z-index: 1001;
@@ -310,73 +316,70 @@ input:checked + .slider:before { transform: translateX(26px); }
 }
 
 .modal-content { max-width: 90%; max-height: 90%; border-radius: 10px; }
-.close-zoom { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+.close-zoom { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
 
-
-.carrito-content {
-    background: white; padding: 25px;
-    width: 100%; max-width: 500px;
-    position: relative; max-height: 80vh;
-    display: flex; flex-direction: column;
-}
-.carrito-content h3 { margin-bottom: 20px; text-transform: lowercase; }
-.carrito-content .close-zoom { color: var(--dark-text); top: 10px; right: 20px; font-size: 30px; }
-
-#lista-carrito { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 10px; }
-
-.carrito-item-lista {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0; border-bottom: 1px solid #eee;
-}
-.carrito-item-info strong { text-transform: lowercase; }
-.carrito-item-info span { font-size: 0.85rem; color: var(--text-muted); }
-
-.btn-eliminar-item { background: transparent; border: none; color: #dc2626; cursor: pointer; font-size: 1.1rem; }
-
-.carrito-footer { border-top: 2px solid #eee; padding-top: 15px; }
-.carrito-resumen-fila, .carrito-total-fila { display: flex; justify-content: space-between; margin-bottom: 5px; }
-.carrito-total-fila { font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: var(--dark-text); }
-
-.btn-carrito-enviar {
-    width: 100%; padding: 15px;
-    background: var(--dark-graphite); color: white;
-    border: none; border-radius: 8px; font-size: 1rem; font-weight: bold;
-    cursor: pointer; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px;
-    transition: var(--transition);
-}
-.btn-carrito-enviar:hover { background: var(--soft-gold); }
-.aviso-de-envio { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; text-align: center; font-style: italic;color: red;}
-
-
-
-.form-container { 
-    max-width: 600px; margin: 0 auto; background: white; 
-    padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; 
-}
-.form-container h3 { margin-bottom: 10px; }
-.form-container p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem; }
-.form-container input, .form-container textarea { 
-    width: 100%; padding: 12px; margin-bottom: 15px; 
-    border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; 
-}
-.form-container textarea { height: 120px; resize: vertical; }
-.btn-submit { 
-    background: var(--soft-gold); color: white; border: none; 
-    padding: 12px 30px; border-radius: 25px; cursor: pointer; 
-    font-weight: bold; width: 100%; transition: var(--transition); 
-}
-.btn-submit:hover { background: var(--dark-graphite); }
-
-
+/* =========================================
+   8. RESPONSIVE (MÓVILES)
+   ========================================= */
 @media (max-width: 768px) {
     header { flex-wrap: wrap; gap: 15px; }
     .search-container { width: 100%; order: 3; }
     
-    .banner-card { flex: 0 0 85%; } 
+    .grid-productos { 
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+        gap: 12px; 
+    }
     
-    #btn-carrito-flotante { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.2rem; }
-    
-    .grid-productos { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-    .card-image-wrapper img, .producto-card img { height: 200px; }
+    .card-image-wrapper img, .producto-card img { height: 180px; }
     .info { padding: 10px; }
+    .info h3 { font-size: 1rem; }
+    .detalles { font-size: 0.8rem; line-height: 1.3; }
+    
+    .btn-ver-tienda { padding: 8px; font-size: 0.85rem; }
+}
+
+/* =========================================
+   9. CORRECCIÓN TEXTOS COMPLETOS EN TIENDAS
+   ========================================= */
+.tienda-card {
+    height: auto;
+    min-height: 100%;
+}
+
+.tienda-card .info {
+    height: auto;
+    overflow: visible;
+}
+
+.tienda-card .info h3 {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tienda-card .detalles {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    display: block;
+    max-height: none;
+    line-height: 1.4;
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
+.tienda-card .btn-ver-tienda {
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .tienda-card .info {
+        min-height: 190px;
+    }
+
+    .tienda-card .detalles {
+        font-size: 0.82rem;
+        line-height: 1.35;
+    }
 }
