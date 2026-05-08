@@ -378,8 +378,12 @@ setInterval(rotarBanners, 5000);
 
                 return `
                 <div class="card producto-card ${claseTarjetaVerificada} animate__animated animate__zoomIn" style="animation-delay: ${index * 0.05}s">
-                    <div class="zoom-overlay" onclick="abrirZoom('${p[3]}')"><i class="fas fa-search-plus"></i> acercar</div>
-                    <img src="${p[3]}" alt="${p[1]}" loading="lazy">
+                    <div class="producto-img-wrapper">
+                        <img src="${p[3]}" alt="${p[1]}" loading="lazy">
+                        <button class="btn-acercar" onclick="abrirZoom('${p[3]}')" type="button">
+                            <i class="fas fa-search-plus"></i> acercar
+                        </button>
+                    </div>
                     <div class="info">
                         <div class="card-tienda-info" style="margin-bottom:8px; display:flex; flex-direction:column; gap:2px;">
                             <span class="tienda-nombre-v" style="font-size:0.75rem; color:#6b7280; text-transform:uppercase; font-weight:700;">${p[0]}</span>
