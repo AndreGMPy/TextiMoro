@@ -30,6 +30,25 @@
     </header>
 
    
+
+    <section class="intro-textimoro animate__animated animate__fadeIn" id="hero-banner">
+        <p class="intro-etiqueta">Bienvenido a</p>
+        <h2>Texti<span>Moro</span></h2>
+        <p class="intro-subtitulo">Descubre negocios textiles de Moroleón y Uriangato en un solo lugar.</p>
+    </section>
+
+    <div id="seccion-anuncios" class="carrusel-contenedor">
+    <div class="carrusel-pista" id="pista-banners">
+       
+        <img src="https://i.postimg.cc/h4NBK4LX/Gemini-Generated-Image-z8n4u4z8n4u4z8n4.png" class="banner-foto">
+        <img src="https://i.postimg.cc/h4NBK4LX/Gemini-Generated-Image-z8n4u4z8n4u4z8n4.png" class="banner-foto">
+        <img src="https://i.postimg.cc/h4NBK4LX/Gemini-Generated-Image-z8n4u4z8n4u4z8n4.png" class="banner-foto">
+    </div>
+</div>
+        
+    
+
+
     <div class="filtros-bar animate__animated animate__fadeInDown">
         <div class="filtros-container">
             <div class="toggle-wrapper">
@@ -53,23 +72,6 @@
     </div>
 
    
-
-    <div id="seccion-anuncios" class="carrusel-contenedor">
-    <div class="carrusel-pista" id="pista-banners">
-       
-        <img src="https://i.postimg.cc/h4NBK4LX/Gemini-Generated-Image-z8n4u4z8n4u4z8n4.png" class="banner-foto">
-        <img src="https://i.postimg.cc/h4NBK4LX/Gemini-Generated-Image-z8n4u4z8n4u4z8n4.png" class="banner-foto">
-        <img src="https://i.postimg.cc/h4NBK4LX/Gemini-Generated-Image-z8n4u4z8n4u4z8n4.png" class="banner-foto">
-    </div>
-</div>
-        
-    
-
-
-    <div class="hero-box animate__animated animate__fadeIn" id="hero-banner">
-        <p class="hero-description">"Moda de Moroleón y Uriangato directo hasta tu casa"</p>
-        <div class="hero-line"></div>
-    </div>
 
 
     <div class="container">
@@ -235,21 +237,24 @@ setInterval(rotarBanners, 5000);
 
   
         function mostrarDirectorio() {
-    vistaActual = 'directorio';
-    document.getElementById('btn-regresar').classList.add('hidden');
-    document.getElementById('seccion-contacto').classList.add('hidden');
-    document.getElementById('main-grid').classList.remove('hidden');
-    document.getElementById('hero-banner').classList.remove('hidden');
+            vistaActual = 'directorio';
+            categoriaActual = "";
+            document.getElementById('btn-regresar').classList.add('hidden');
+            document.getElementById('seccion-contacto').classList.add('hidden');
+            document.getElementById('main-grid').classList.remove('hidden');
+            document.getElementById('hero-banner').classList.remove('hidden');
+            document.getElementById('seccion-anuncios').classList.remove('hidden');
 
-    // Mostrar otra vez los banners al regresar al directorio
-    document.getElementById('seccion-anuncios').classList.remove('hidden');
+            document.querySelectorAll('.burbuja').forEach(b => b.classList.remove('activa'));
+            const btnTodos = document.querySelector('.burbuja');
+            if (btnTodos) btnTodos.classList.add('activa');
 
-    document.getElementById('titulo-seccion').innerText = "negocios destacados";
-    document.getElementById('btn-carrito-flotante').classList.add('hidden');
-    aplicarFiltros();
+            document.getElementById('titulo-seccion').innerText = "negocios destacados";
+            document.getElementById('btn-carrito-flotante').classList.add('hidden');
+            aplicarFiltros();
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function abrirTienda(nombre) {
             if (carrito.length > 0 && tiendaSeleccionada !== "" && tiendaSeleccionada !== nombre) {
@@ -295,6 +300,10 @@ setInterval(rotarBanners, 5000);
             if(vistaActual === 'contacto') return;
             const textoBusqueda = document.getElementById('buscador').value.toLowerCase();
             const soloMayoreo = document.getElementById('toggle-mayoreo').checked;
+
+            if (typeof categoriaActual === "undefined" || categoriaActual === null) {
+                categoriaActual = "";
+            }
 
             if (vistaActual === 'directorio') {
                 const tiendasFiltradas = tiendas.filter(t => {
