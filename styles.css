@@ -1,6 +1,5 @@
-/* =========================================
-   1. VARIABLES Y ESTILOS BASE
-   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap');
+
 :root {
     --soft-gold: #dcb978;
     --dark-text: #1a1a1a;
@@ -40,9 +39,7 @@ body {
     font-size: 1.8rem;
 }
 
-/* =========================================
-   2. ENCABEZADO Y BÚSQUEDA
-   ========================================= */
+
 header {
     background: white;
     padding: 15px 5%;
@@ -98,9 +95,7 @@ header {
 
 .btn-nav:hover { background: var(--soft-gold); color: white; }
 
-/* =========================================
-   3. FILTROS
-   ========================================= */
+
 .filtros-bar {
     background: white;
     border-bottom: 1px solid #eee;
@@ -160,9 +155,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 
 .burbuja.activa, .burbuja:hover { background: var(--soft-gold); color: white; }
 
-/* =========================================
-   4. CARRUSEL VIP
-   ========================================= */
+
 .carrusel-contenedor {
     width: 100%;
     max-width: 500px;
@@ -184,9 +177,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     object-fit: cover;
 }
 
-/* =========================================
-   5. HERO Y MENSAJES
-   ========================================= */
+
 .hero-box { text-align: center; margin: 40px 20px; }
 .hero-description { font-style: italic; color: var(--text-muted); font-size: 1.1rem; }
 .hero-line { width: 50px; height: 3px; background: var(--soft-gold); margin: 15px auto; }
@@ -204,9 +195,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     font-size: 1rem;
 }
 
-/* =========================================
-   6. GRID DE TARJETAS (CORREGIDO)
-   ========================================= */
+
 .grid-productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -290,9 +279,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     transition: var(--transition);
 }
 
-/* =========================================
-   7. MODALES Y CARRITO
-   ========================================= */
+
 #btn-carrito-flotante {
     position: fixed; bottom: 30px; right: 30px;
     background: var(--dark-graphite); color: white;
@@ -318,9 +305,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 .modal-content { max-width: 90%; max-height: 90%; border-radius: 10px; }
 .close-zoom { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
 
-/* =========================================
-   8. RESPONSIVE (MÓVILES)
-   ========================================= */
+
 @media (max-width: 768px) {
     header { flex-wrap: wrap; gap: 15px; }
     .search-container { width: 100%; order: 3; }
@@ -349,9 +334,6 @@ input:checked + .slider:before { transform: translateX(26px); }
     .btn-ver-tienda { padding: 8px; font-size: 0.85rem; }
 }
 
-/* =========================================
-   BOTÓN DE ACERCAR DENTRO DE LA PRENDA
-   ========================================= */
 .producto-img-wrapper {
     position: relative;
     width: 100%;
@@ -403,7 +385,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     }
 }
 
-/* Evita que se corte la descripción de las tiendas */
+
 .tienda-card {
     height: auto !important;
     min-height: auto !important;
@@ -429,9 +411,7 @@ input:checked + .slider:before { transform: translateX(26px); }
 .tienda-card .btn-ver-tienda {
     margin-top: 10px;
 }
-/* =========================================
-   FORMULARIO DE CONTACTO
-   ========================================= */
+
 
 #seccion-contacto {
     max-width: 650px;
@@ -506,7 +486,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     transform: translateY(-2px);
 }
 
-/* Responsive del formulario */
+
 @media (max-width: 768px) {
     #seccion-contacto {
         max-width: 100%;
@@ -521,9 +501,6 @@ input:checked + .slider:before { transform: translateX(26px); }
         font-size: 1.25rem;
     }
 }
-/* =========================================
-   CARRITO DE COMPRAS
-   ========================================= */
 
 #modalCarrito {
     display: none;
@@ -636,7 +613,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     gap: 10px;
 }
 
-/* Responsive carrito */
+
 @media (max-width: 768px) {
     .carrito-content {
         max-width: 95%;
@@ -657,7 +634,6 @@ input:checked + .slider:before { transform: translateX(26px); }
     }
 }
 
-
 .producto-card .producto-img-wrapper {
     height: 280px;
 }
@@ -677,7 +653,7 @@ input:checked + .slider:before { transform: translateX(26px); }
     display: block;
 }
 
-
+/* Evita que el botón de cerrar del carrito herede el color blanco del modal de imagen */
 #modalCarrito .close-zoom {
     color: var(--dark-text) !important;
 }
@@ -685,5 +661,104 @@ input:checked + .slider:before { transform: translateX(26px); }
 @media (max-width: 768px) {
     .producto-card .producto-img-wrapper {
         height: 180px;
+    }
+}
+
+
+.logo h1,
+#titulo-seccion,
+.intro-textimoro h2,
+.form-container h3,
+.info h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.intro-textimoro {
+    text-align: center;
+    margin: 45px auto 18px auto;
+    padding: 0 20px;
+}
+
+.intro-etiqueta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.intro-textimoro h2 {
+    font-size: 3.1rem;
+    line-height: 1;
+    color: var(--dark-text);
+    margin-bottom: 16px;
+    font-weight: 800;
+    text-transform: none;
+}
+
+.intro-textimoro h2 span {
+    color: var(--soft-gold);
+}
+
+.intro-subtitulo {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+
+
+.carrusel-contenedor {
+    margin: 24px auto 32px auto;
+    max-width: 540px;
+}
+
+.filtros-bar {
+    background: white;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 15px 5%;
+    margin-bottom: 25px;
+}
+
+.filtros-container {
+    justify-content: center;
+}
+
+#titulo-seccion {
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .intro-textimoro {
+        margin: 30px auto 15px auto;
+        padding: 0 16px;
+    }
+
+    .intro-etiqueta {
+        font-size: 0.78rem;
+        letter-spacing: 1.5px;
+    }
+
+    .intro-textimoro h2 {
+        font-size: 2.25rem;
+        margin-bottom: 12px;
+    }
+
+    .intro-subtitulo {
+        font-size: 0.92rem;
+    }
+
+    .carrusel-contenedor {
+        width: calc(100% - 32px);
+        margin: 18px auto 24px auto;
+    }
+
+    .filtros-container {
+        justify-content: flex-start;
     }
 }
