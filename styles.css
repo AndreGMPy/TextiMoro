@@ -155,26 +155,45 @@ input:checked + .slider:before { transform: translateX(26px); }
 
 .burbuja.activa, .burbuja:hover { background: var(--soft-gold); color: white; }
 
+/* =========================================
+   BANNERS PUBLICITARIOS RESPONSIVE
+   ========================================= */
 
 .carrusel-contenedor {
     width: 100%;
-    max-width: 500px;
-    margin: 30px auto;
+    max-width: 1100px;
+    margin: 24px auto 28px auto;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .carrusel-pista {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    flex-direction: row;
     width: 100%;
+    transition: transform 0.5s ease-in-out;
 }
 
 .banner-foto {
-    min-width: 100%;
-    height: auto;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 350px;
     object-fit: cover;
+    object-position: center;
+}
+
+/* Celular */
+@media (max-width: 768px) {
+    .carrusel-contenedor {
+        max-width: 92%;
+        margin: 18px auto 20px auto;
+        border-radius: 10px;
+    }
+
+    .banner-foto {
+        height: 230px;
+    }
 }
 
 
@@ -760,5 +779,61 @@ input:checked + .slider:before { transform: translateX(26px); }
 
     .filtros-container {
         justify-content: flex-start;
+    }
+}
+
+/* =========================================
+   BUSCADOR CENTRAL DEBAJO DEL BANNER
+   ========================================= */
+.busqueda-central {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px 20px 20px;
+    background: var(--bg-light);
+}
+
+.busqueda-central .buscador-principal {
+    position: relative;
+    width: min(90%, 620px) !important;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.busqueda-central .buscador-principal input {
+    width: 100%;
+    padding: 12px 18px 12px 45px;
+    border-radius: 28px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    background: white;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    transition: var(--transition);
+}
+
+.busqueda-central .buscador-principal input:focus {
+    border-color: var(--soft-gold);
+    box-shadow: 0 0 0 3px rgba(220, 185, 120, 0.18);
+}
+
+.busqueda-central .buscador-principal i {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .busqueda-central {
+        padding: 0 16px 16px 16px;
+    }
+
+    .busqueda-central .buscador-principal {
+        width: 100% !important;
+        max-width: 100%;
+        order: initial;
     }
 }
